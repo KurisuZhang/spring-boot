@@ -1,5 +1,6 @@
 # spring-boot
 - eureka server
+- RestTemplate
 - rellience4j
 - zepkin
 - Elasticsearch: Stores and indexes data.  
