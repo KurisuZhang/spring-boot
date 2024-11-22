@@ -2,6 +2,7 @@
 - eureka server
 - RestTemplate
 - rellience4j
+- slf4j
 - zepkin
 - Elasticsearch: Stores and indexes data.  
 - Logstash: Processes and forwards logs/data to Elasticsearch.  
