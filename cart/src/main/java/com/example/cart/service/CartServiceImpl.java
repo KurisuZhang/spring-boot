@@ -15,17 +15,18 @@ import java.util.List;
 @Service
 public class CartServiceImpl implements CartService {
 
+
     @Autowired
     private CartRepository cartRepository;
 
     @Autowired
     private RestTemplate restTemplate;
 
-    Logger logger= LoggerFactory.getLogger(CartService.class);
+    Logger logger = LoggerFactory.getLogger(CartService.class);
 
     @Override
     public CartItem addItem(CartItem item) {
-        logger.info("ORDER-SERVICE: "+ "Item Added");
+        logger.info("ORDER-SERVICE: " + "Item Added");
         return cartRepository.save(item);
     }
 
@@ -42,11 +43,11 @@ public class CartServiceImpl implements CartService {
     @Override
     @CircuitBreaker(name = "orderService", fallbackMethod = "checkoutFallback")
     public String checkout() {
+
         String url = "http://order-service/orders/create";
 
-        // Correctly using POST method
         Order order = restTemplate.postForObject(url, null, Order.class);
-
+        logger.info("CART-SERVICE: " + "checkout");
         if (order != null && "CREATED".equals(order.getStatus())) {
             return "Order created successfully with ID: " + order.getId();
         } else {

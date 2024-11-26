@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  eureka:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: eureka
+    ports:
+      - "8761:8761"
+    networks:
+      - spring-cloud-net
+
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - EUREKA_SERVER_URL=http://eureka:8761/eureka/
+    networks:
+      - spring-cloud-net
+    depends_on:
+      - eureka
+
+  cart:
+    build:
+      context: ./cart
+      dockerfile: Dockerfile
+    container_name: cart
+    ports:
+      - "8081:8081"
+    environment:
+      - EUREKA_SERVER_URL=http://eureka:8761/eureka/
+      - ZIPKIN_URL=http://zipkin:9411/api/v2/spans
+    networks:
+      - spring-cloud-net
+    depends_on:
+      - eureka
+
+  order:
+    build:
+      context: ./order
+      dockerfile: Dockerfile
+    container_name: order
+    ports:
+      - "8082:8082"
+    environment:
+      - EUREKA_SERVER_URL=http://eureka:8761/eureka/
+      - ZIPKIN_URL=http://zipkin:9411/api/v2/spans
+    networks:
+      - spring-cloud-net
+    depends_on:
+      - eureka
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - spring-cloud-net
+
+networks:
+  spring-cloud-net:
+    driver: bridge
