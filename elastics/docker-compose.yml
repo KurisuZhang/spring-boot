@@ -39,16 +39,6 @@ services:
     depends_on:
       - elasticsearch
 
-  spring-boot-app:
-    build: ./spring-boot-app
-    container_name: spring-boot-app
-    volumes:
-      - ./spring-boot-app:/app
-    networks:
-      - elk
-    depends_on:
-      - logstash
-
 volumes:
   myData:
 
