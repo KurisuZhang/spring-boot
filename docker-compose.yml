@@ -31,6 +31,7 @@ services:
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
     depends_on:
       - eureka
+      - gateway
       - postgres
       - zipkin
 
@@ -47,6 +48,7 @@ services:
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
     depends_on:
       - eureka
+      - gateway
       - postgres
       - zipkin
 
