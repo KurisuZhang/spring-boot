@@ -29,8 +29,6 @@ services:
       - POSTGRESQL_URL=${POSTGRESQL_URL}
       - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - LOGSTASH_HOST=${LOGSTASH_HOST}
-      - LOGSTASH_PORT=${LOGSTASH_PORT}
     depends_on:
       - eureka
       - gateway
@@ -48,8 +46,6 @@ services:
       - POSTGRESQL_URL=${POSTGRESQL_URL}
       - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
       - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-      - LOGSTASH_HOST=${LOGSTASH_HOST}
-      - LOGSTASH_PORT=${LOGSTASH_PORT}
     depends_on:
       - eureka
       - gateway
