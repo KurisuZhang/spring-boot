@@ -2,10 +2,12 @@ package com.example.order.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
-@Table(name = "`order`")
+@ToString
+@Table(name = "`orders`")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

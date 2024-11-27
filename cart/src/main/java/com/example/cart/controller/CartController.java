@@ -1,6 +1,7 @@
 package com.example.cart.controller;
 
 import com.example.cart.model.CartItem;
+import com.example.cart.model.CartItemDTO;
 import com.example.cart.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ public class CartController {
     private CartService cartService;
 
     @PostMapping("/add")
-    public CartItem addItem(@RequestBody CartItem item) {
+    public CartItem addItem(@RequestBody CartItemDTO item) {
         return cartService.addItem(item);
     }
 

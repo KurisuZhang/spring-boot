@@ -18,16 +18,20 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order createOrder() {
+        // create
         Order order = new Order();
         order.setStatus("CREATED");
-
-        logger.info("ORDER-SERVICE: "+ "createOrder");
+        // log
+        logger.info("ORDER-SERVICE[createOrder]: {}", order);
 
         return orderRepository.save(order);
     }
 
     @Override
     public Order getOrder(Long id) {
-        return orderRepository.findById(id).orElse(null);
+        Order order = orderRepository.findById(id).orElse(null);
+        // log
+        logger.info("ORDER-SERVICE[getOrder]: {}", order);
+        return order;
     }
 }

@@ -2,10 +2,12 @@ package com.example.cart.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
-@Table(name = "`cart`")
+@ToString
+@Table(name = "`carts`")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
