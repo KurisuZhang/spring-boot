@@ -16,6 +16,7 @@ services:
       - EUREKA_SERVER_URL=${EUREKA_SERVER_URL}
     depends_on:
       - eureka
+      - postgres
 
   cart:
     image: kurisuzhang/cart
@@ -31,6 +32,7 @@ services:
     depends_on:
       - eureka
       - postgres
+      - zipkin
 
   order:
     image: kurisuzhang/order
@@ -46,6 +48,7 @@ services:
     depends_on:
       - eureka
       - postgres
+      - zipkin
 
   zipkin:
     image: openzipkin/zipkin
