@@ -6,6 +6,9 @@ services:
     container_name: eureka
     ports:
       - "8761:8761"
+    depends_on:
+      - zipkin
+      - postgres
 
   gateway:
     image: kurisuzhang/gateway
@@ -16,7 +19,6 @@ services:
       - EUREKA_SERVER_URL=${EUREKA_SERVER_URL}
     depends_on:
       - eureka
-      - postgres
 
   cart:
     image: kurisuzhang/cart
@@ -34,10 +36,7 @@ services:
       - LOGSTASH_PORT=${LOGSTASH_PORT}
       - KAFKA_IP=${KAFKA_IP}
     depends_on:
-      - eureka
       - gateway
-      - postgres
-      - zipkin
 
   order:
     image: kurisuzhang/order
@@ -55,10 +54,7 @@ services:
       - LOGSTASH_PORT=${LOGSTASH_PORT}
       - KAFKA_IP=${KAFKA_IP}
     depends_on:
-      - eureka
       - gateway
-      - postgres
-      - zipkin
 
   zipkin:
     image: openzipkin/zipkin
