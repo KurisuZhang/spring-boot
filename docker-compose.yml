@@ -9,6 +9,12 @@ services:
     depends_on:
       - zipkin
       - postgres
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://eureka:8761/eureka/apps" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
 
   gateway:
     image: kurisuzhang/gateway
@@ -18,7 +24,8 @@ services:
     environment:
       - EUREKA_SERVER_URL=${EUREKA_SERVER_URL}
     depends_on:
-      - eureka
+      eureka:
+        condition: service_healthy
 
   cart:
     image: kurisuzhang/cart
